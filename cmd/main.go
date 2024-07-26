@@ -1,14 +1,9 @@
 package main
 
-import "github.com/xeuxdev/go-blog/internal/server"
+import "fmt"
 
 func main() {
 
-	server := server.NewServer()
+	fmt.Println("Hello World!!!!")
 
-	err := server.ListenAndServe()
-	if err != nil {
-		panic(err)
-	}
-	println("Hello World!!!!")
 }
