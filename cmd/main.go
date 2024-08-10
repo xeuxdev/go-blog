@@ -7,6 +7,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/xeuxdev/go-blog/internal/database"
+	"github.com/xeuxdev/go-blog/internal/handlers"
 )
 
 func main() {
@@ -21,10 +22,10 @@ func main() {
 		w.Write([]byte("Hello World!!!!"))
 	})
 
-	// router.Route("/users", handlers.HandleUsers)
+	router.Route("/users", handlers.HandleUsers)
 
-	fmt.Println("Server is running on port 8080")
-	err := http.ListenAndServe(":8080", router)
+	fmt.Println("Server is running on port 3000")
+	err := http.ListenAndServe(":3000", router)
 
 	if err != nil {
 		panic(err)

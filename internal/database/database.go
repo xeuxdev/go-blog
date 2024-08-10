@@ -1,7 +1,7 @@
 package database
 
 import (
-	"database/sql"
+	"fmt"
 	"log"
 	"os"
 
@@ -10,17 +10,18 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 )
 
-type service struct {
-	db *sql.DB
-}
+// type service struct {
+// 	db *sql.DB
+// }
 
 var (
-	dbname     = os.Getenv("DB_DATABASE")
-	password   = os.Getenv("DB_PASSWORD")
-	username   = os.Getenv("DB_USERNAME")
-	port       = os.Getenv("DB_PORT")
-	host       = os.Getenv("DB_HOST")
-	dbInstance *service
+	// dbname     = os.Getenv("DB_DATABASE")
+	// password   = os.Getenv("DB_PASSWORD")
+	// username   = os.Getenv("DB_USERNAME")
+	// port       = os.Getenv("DB_PORT")
+	// host       = os.Getenv("DB_HOST")
+	DB_URL = os.Getenv("DB_URL")
+	// dbInstance *service
 )
 
 // func ConnectDB() *service {
@@ -46,17 +47,18 @@ var DB *sqlx.DB
 
 func ConnectDB() {
 	var err error
-	DB, err = sqlx.Connect("mysql", "username:password@tcp(127.0.0.1:3306)/blogdb")
+	DB, err = sqlx.Connect("mysql", DB_URL)
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
+	fmt.Println("Connected to the database")
 }
 
 // Close closes the database connection.
 // It logs a message indicating the disconnection from the specific database.
 // If the connection is successfully closed, it returns nil.
 // If an error occurs while closing the connection, it returns the error.
-func (s *service) Close() error {
-	log.Printf("Disconnected from database: %s", dbname)
-	return s.db.Close()
-}
+// func (s *service) Close() error {
+// 	log.Printf("Disconnected from database: %s", dbname)
+// 	return s.db.Close()
+// }
