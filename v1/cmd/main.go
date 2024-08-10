@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	database.ConnectDB()
+	db := database.ConnectDB()
 
 	router := chi.NewRouter()
 	router.Use(middleware.Logger)
@@ -22,7 +22,9 @@ func main() {
 		w.Write([]byte("Hello World!!!!"))
 	})
 
-	router.Route("/users", handlers.HandleUsers)
+	service := &handlers.Service{DB: db}
+
+	service.HandleUsers(router)
 
 	fmt.Println("Server is running on port 3000")
 	err := http.ListenAndServe(":3000", router)
