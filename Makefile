@@ -3,6 +3,10 @@
 # Build the application
 all: build
 
+dev: 
+	@echo "Starting dev server..."
+	@air
+
 build:
 	@echo "Building..."
 	
